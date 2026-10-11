@@ -80,10 +80,21 @@ namespace TiltingMaze
             UpdateTileAppearance(e.x, e.y);
         }
 
-        private void Model_GameOver(object? sender, bool isWon)
+        private void Model_GameOver(object? sender, (bool isWon, bool isNewRecord) e)
         {
-            string msg = isWon ? $"nyertel: {_model.TiltCount} lepesbol" : "vesztettel";
-            MessageBox.Show(msg, "Game Over", MessageBoxButtons.OK, isWon ? MessageBoxIcon.Information : MessageBoxIcon.Error);
+            if (e.isWon)
+            {
+                string msg = $"nyertel: {_model.TiltCount} lepesbol";
+                if (e.isNewRecord)
+                {
+                    msg += "\nuj rekord!";
+                }
+                MessageBox.Show(msg, "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Game Over ! Wrong Hole", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         //palyaepites

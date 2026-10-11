@@ -15,6 +15,7 @@ namespace TiltingMaze.Model
         private TileType[,] _board;
         private List<Ball> _balls;
         private Stack<GameStateSnapshot> _undoStack;
+        private int _currentLevelIndex;
 
         private System.Timers.Timer _timer;
 
@@ -38,7 +39,7 @@ namespace TiltingMaze.Model
 
         #region Events
         public event EventHandler? GameCreated;
-        public event EventHandler<bool>? GameOver;
+        public event EventHandler<(bool isWon, bool isNewRecord)>? GameOver;
         public event EventHandler<int>? TimeAdvanced;
         public event EventHandler<(int, int)>? FieldChanged;
 
@@ -61,6 +62,7 @@ namespace TiltingMaze.Model
         #region Public methods
         public async Task NewGameAsync(int levelIndex)
         {
+            _currentLevelIndex = levelIndex;
             // TODO: Call _dataAccess to load the level -- kesz
             // TODO: Reset _gameTime, _tiltCount, _isGameOver, _undoStack -- kesz
 
@@ -332,10 +334,23 @@ namespace TiltingMaze.Model
         #endregion
 
         #region Private event methods
-        public void OnGameOver(bool isWon)
+        public async void OnGameOver(bool isWon)
         {
             _isGameOver = true;
-            GameOver?.Invoke(this, isWon);
+            bool isNewRecord = false;
+
+            if (isWon)
+            {
+                var highScores = await _dataAccess.LoadHighScoreAsync();
+
+                if(!highScores.ContainsKey(_currentLevelIndex) ||_tiltCount < highScores[_currentLevelIndex])
+                {
+                    isNewRecord = true;
+                    await _dataAccess.SaveHighScoreAsync(_currentLevelIndex, _tiltCount);
+                }
+            }
+
+            GameOver?.Invoke(this, (isWon, isNewRecord));
         }
         private void OnFieldChanged(int x, int y)
         {
