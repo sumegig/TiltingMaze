@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../TiltingMaze.Test/TiltingMaze.Test.csproj" Id="a82fe469-15ac-42f2-8814-97c4b6689748" />
+  <Project Path="TiltingMaze.csproj" />
+</Solution>
