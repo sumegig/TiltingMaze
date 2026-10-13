@@ -30,96 +30,107 @@
         {
             menuStrip1 = new MenuStrip();
             newGameToolStripMenuItem = new ToolStripMenuItem();
-            newGameMenuItem = new ToolStripMenuItem();
-            level1ToolStripMenuItem = new ToolStripMenuItem();
-            level2ToolStripMenuItem = new ToolStripMenuItem();
-            undoToolStripMenuItem = new ToolStripMenuItem();
+            NewGameMenuItem = new ToolStripMenuItem();
+            Level1ToolStripMenuItem = new ToolStripMenuItem();
+            Level2ToolStripMenuItem = new ToolStripMenuItem();
+            Level3ToolStripMenuItem = new ToolStripMenuItem();
+            UndoToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem1 = new ToolStripSeparator();
-            exitToolStripMenuItem = new ToolStripMenuItem();
+            ExitToolStripMenuItem = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             timeLabel = new ToolStripStatusLabel();
             stepLabel = new ToolStripStatusLabel();
             gridPanel = new TableLayoutPanel();
-            level3ToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
+            menuStrip1.ImageScalingSize = new Size(24, 24);
             menuStrip1.Items.AddRange(new ToolStripItem[] { newGameToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1047, 24);
+            menuStrip1.Padding = new Padding(9, 3, 0, 3);
+            menuStrip1.Size = new Size(1496, 35);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
             // newGameToolStripMenuItem
             // 
-            newGameToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newGameMenuItem, undoToolStripMenuItem, toolStripMenuItem1, exitToolStripMenuItem });
+            newGameToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { NewGameMenuItem, UndoToolStripMenuItem, toolStripMenuItem1, ExitToolStripMenuItem });
             newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            newGameToolStripMenuItem.Size = new Size(50, 20);
+            newGameToolStripMenuItem.Size = new Size(74, 29);
             newGameToolStripMenuItem.Text = "Game";
             // 
-            // newGameMenuItem
+            // NewGameMenuItem
             // 
-            newGameMenuItem.DropDownItems.AddRange(new ToolStripItem[] { level1ToolStripMenuItem, level2ToolStripMenuItem, level3ToolStripMenuItem });
-            newGameMenuItem.Name = "newGameMenuItem";
-            newGameMenuItem.Size = new Size(180, 22);
-            newGameMenuItem.Text = "New Game (level1)";
+            NewGameMenuItem.DropDownItems.AddRange(new ToolStripItem[] { Level1ToolStripMenuItem, Level2ToolStripMenuItem, Level3ToolStripMenuItem });
+            NewGameMenuItem.Name = "NewGameMenuItem";
+            NewGameMenuItem.Size = new Size(270, 34);
+            NewGameMenuItem.Text = "New Game (level1)";
             // 
-            // level1ToolStripMenuItem
+            // Level1ToolStripMenuItem
             // 
-            level1ToolStripMenuItem.Name = "level1ToolStripMenuItem";
-            level1ToolStripMenuItem.Size = new Size(180, 22);
-            level1ToolStripMenuItem.Text = "level1";
-            level1ToolStripMenuItem.Click += level1ToolStripMenuItem_Click;
+            Level1ToolStripMenuItem.Name = "Level1ToolStripMenuItem";
+            Level1ToolStripMenuItem.Size = new Size(270, 34);
+            Level1ToolStripMenuItem.Text = "Level 1";
+            Level1ToolStripMenuItem.Click += Level1ToolStripMenuItem_Click;
             // 
-            // level2ToolStripMenuItem
+            // Level2ToolStripMenuItem
             // 
-            level2ToolStripMenuItem.Name = "level2ToolStripMenuItem";
-            level2ToolStripMenuItem.Size = new Size(180, 22);
-            level2ToolStripMenuItem.Text = "level2";
-            level2ToolStripMenuItem.Click += level2ToolStripMenuItem_Click;
+            Level2ToolStripMenuItem.Name = "Level2ToolStripMenuItem";
+            Level2ToolStripMenuItem.Size = new Size(270, 34);
+            Level2ToolStripMenuItem.Text = "Level 2";
+            Level2ToolStripMenuItem.Click += Level2ToolStripMenuItem_Click;
             // 
-            // undoToolStripMenuItem
+            // Level3ToolStripMenuItem
             // 
-            undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            undoToolStripMenuItem.Size = new Size(180, 22);
-            undoToolStripMenuItem.Text = "Undo";
-            undoToolStripMenuItem.Click += undoToolStripMenuItem_Click;
+            Level3ToolStripMenuItem.Name = "Level3ToolStripMenuItem";
+            Level3ToolStripMenuItem.Size = new Size(270, 34);
+            Level3ToolStripMenuItem.Text = "Level 3";
+            Level3ToolStripMenuItem.Click += Level3ToolStripMenuItem_Click;
+            // 
+            // UndoToolStripMenuItem
+            // 
+            UndoToolStripMenuItem.Name = "UndoToolStripMenuItem";
+            UndoToolStripMenuItem.Size = new Size(270, 34);
+            UndoToolStripMenuItem.Text = "Undo";
+            UndoToolStripMenuItem.Click += UndoToolStripMenuItem_Click;
             // 
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(177, 6);
+            toolStripMenuItem1.Size = new Size(267, 6);
             // 
-            // exitToolStripMenuItem
+            // ExitToolStripMenuItem
             // 
-            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(180, 22);
-            exitToolStripMenuItem.Text = "Exit";
-            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
+            ExitToolStripMenuItem.Size = new Size(270, 34);
+            ExitToolStripMenuItem.Text = "Exit";
+            ExitToolStripMenuItem.Click += ExitToolStripMenuItem_Click;
             // 
             // statusStrip1
             // 
+            statusStrip1.ImageScalingSize = new Size(24, 24);
             statusStrip1.Items.AddRange(new ToolStripItem[] { timeLabel, stepLabel });
-            statusStrip1.Location = new Point(0, 628);
+            statusStrip1.Location = new Point(0, 1051);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1047, 22);
+            statusStrip1.Padding = new Padding(1, 0, 20, 0);
+            statusStrip1.Size = new Size(1496, 32);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
             // timeLabel
             // 
             timeLabel.Name = "timeLabel";
-            timeLabel.Size = new Size(51, 17);
+            timeLabel.Size = new Size(77, 25);
             timeLabel.Text = "Time: 0s";
             // 
             // stepLabel
             // 
             stepLabel.Name = "stepLabel";
-            stepLabel.Size = new Size(47, 17);
+            stepLabel.Size = new Size(74, 25);
             stepLabel.Text = "Steps: 0";
             // 
             // gridPanel
@@ -130,32 +141,26 @@
             gridPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             gridPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             gridPanel.Dock = DockStyle.Fill;
-            gridPanel.Location = new Point(0, 24);
+            gridPanel.Location = new Point(0, 35);
             gridPanel.Margin = new Padding(0);
             gridPanel.Name = "gridPanel";
             gridPanel.RowCount = 2;
             gridPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             gridPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            gridPanel.Size = new Size(1047, 604);
+            gridPanel.Size = new Size(1496, 1016);
             gridPanel.TabIndex = 2;
-            // 
-            // level3ToolStripMenuItem
-            // 
-            level3ToolStripMenuItem.Name = "level3ToolStripMenuItem";
-            level3ToolStripMenuItem.Size = new Size(180, 22);
-            level3ToolStripMenuItem.Text = "level3";
-            level3ToolStripMenuItem.Click += level3ToolStripMenuItem_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1047, 650);
+            ClientSize = new Size(1496, 1083);
             Controls.Add(gridPanel);
             Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);
             KeyPreview = true;
             MainMenuStrip = menuStrip1;
+            Margin = new Padding(4, 5, 4, 5);
             Name = "Form1";
             Text = "Tilting Maze";
             KeyDown += Form1_KeyDown;
@@ -171,16 +176,16 @@
 
         private MenuStrip menuStrip1;
         private ToolStripMenuItem newGameToolStripMenuItem;
-        private ToolStripMenuItem newGameMenuItem;
-        private ToolStripMenuItem undoToolStripMenuItem;
+        private ToolStripMenuItem NewGameMenuItem;
+        private ToolStripMenuItem UndoToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem1;
-        private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripMenuItem ExitToolStripMenuItem;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel timeLabel;
         private ToolStripStatusLabel stepLabel;
         private TableLayoutPanel gridPanel;
-        private ToolStripMenuItem level1ToolStripMenuItem;
-        private ToolStripMenuItem level2ToolStripMenuItem;
-        private ToolStripMenuItem level3ToolStripMenuItem;
+        private ToolStripMenuItem Level1ToolStripMenuItem;
+        private ToolStripMenuItem Level2ToolStripMenuItem;
+        private ToolStripMenuItem Level3ToolStripMenuItem;
     }
 }

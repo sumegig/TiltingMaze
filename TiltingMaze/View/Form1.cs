@@ -51,13 +51,13 @@ namespace TiltingMaze
         }
 
 
-        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _model.Undo();
             stepLabel.Text = $"Steps: {_model.TiltCount}";
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -150,30 +150,6 @@ namespace TiltingMaze
                 _ => Color.White
             };
 
-            /*
-            if (pb.Image != null)
-            {
-                pb.Image.Dispose();
-            }
-            pb.Image = null;
-
-            foreach (var ball in _model.Balls)
-            {
-                if (ball.IsActive && ball.X == x && ball.Y == y)
-                {
-                    Bitmap bmp = new Bitmap(200, 200);
-                    using (Graphics g = Graphics.FromImage(bmp))
-                    {
-                        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                        Brush brush = ball.Color == BallColor.Red ? Brushes.Red : Brushes.Blue;
-                        g.FillEllipse(brush, 10, 10, 180, 180);
-                    }
-                    pb.Image = bmp;
-                    break;
-                }
-            }
-            */
-
             foreach (var ball in _model.Balls)
             {
                 if (ball.IsActive && ball.X == x && ball.Y == y)
@@ -186,17 +162,17 @@ namespace TiltingMaze
             pb.Image = null;
 
         }
-        private async void level1ToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void Level1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
            await _model.NewGameAsync(1);
         }
 
-        private async void level2ToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void Level2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             await _model.NewGameAsync(2);
         }
 
-        private async void level3ToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void Level3ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             await _model.NewGameAsync(3);
         }

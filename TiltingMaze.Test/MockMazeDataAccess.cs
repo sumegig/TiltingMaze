@@ -56,12 +56,27 @@ namespace TiltingMaze.Test
             return Task.FromResult((size, grid));
         }
 
+        public Task<(int size, int[,] gridData)> LoadLevelAsync(Stream stream)
+        {
+            return Task.FromResult((0, new int[0, 0]));
+        }
+
         public Task<Dictionary<int, int>> LoadHighScoreAsync()
         {
             return Task.FromResult(new Dictionary<int, int>());
         }
 
+        public Task<Dictionary<int, int>> LoadHighScoreAsync(Stream stream)
+        {
+            return Task.FromResult(new Dictionary<int, int>());
+        }
+
         public Task SaveHighScoreAsync(int levelIndex, int steps)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SaveHighScoreAsync(Stream stream, Dictionary<int, int> scores)
         {
             return Task.CompletedTask;
         }

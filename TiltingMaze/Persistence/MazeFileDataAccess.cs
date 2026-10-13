@@ -22,16 +22,32 @@ namespace TiltingMaze.Persistence
             // pl "level1.txt"
             string filePath = $"level{levelIndex}.txt";
 
-            if(!File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 throw new FileNotFoundException($"Level file not found: {filePath}");
             }
 
-            string[] lines = await File.ReadAllLinesAsync(filePath);
+            using FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+            return await LoadLevelAsync(stream);
+        }
 
-            if(lines.Length == 0)
+        public async Task<(int size, int[,] gridData)> LoadLevelAsync(Stream stream)
+        {
+            using var reader = new StreamReader(stream, Encoding.UTF8, leaveOpen: true);
+            var lines = new List<string>();
+
+            string? line;
+            while ((line = await reader.ReadLineAsync()) != null)
             {
-                throw new InvalidDataException($"Level file is empty: {filePath}");
+                if (!string.IsNullOrWhiteSpace(line))
+                {
+                    lines.Add(line);
+                }
+            }
+
+            if (lines.Count == 0)
+            {
+                throw new InvalidDataException("Level data is empty.");
             }
 
             //elso sor a tabla merete
@@ -39,10 +55,10 @@ namespace TiltingMaze.Persistence
             int[,] gridData = new int[size, size];
 
             //maradek szoveg a tabla felepitese
-            for(int i = 0; i < size; i++)
+            for (int i = 0; i < size; i++)
             {
-                string[] darab = lines[i+1].Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-                
+                string[] darab = lines[i + 1].Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+
                 for (int j = 0; j < size; j++)
                 {
                     gridData[i, j] = int.Parse(darab[j]);
@@ -62,21 +78,29 @@ namespace TiltingMaze.Persistence
                 return highScores;
             }
 
-            string[] sorok = await File.ReadAllLinesAsync(_highScoreFilePath);
+            using FileStream stream = new FileStream(_highScoreFilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+            return await LoadHighScoreAsync(stream);
+        }
 
-            foreach (var s in sorok)
+        public async Task<Dictionary<int, int>> LoadHighScoreAsync(Stream stream)
+        {
+            var highScores = new Dictionary<int, int>();
+            using var reader = new StreamReader(stream, Encoding.UTF8, leaveOpen: true);
+
+            string? line;
+            while ((line = await reader.ReadLineAsync()) != null)
             {
-                string[] darabok = await File.ReadAllLinesAsync(_highScoreFilePath);
-                
+                string[] darabok = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+
                 //"kulcs ertek"
-                if (darabok.Length == 0 &&
+                if (darabok.Length >= 2 &&
                     int.TryParse(darabok[0], out int level) &&
                     int.TryParse(darabok[1], out int steps))
                 {
                     highScores[level] = steps;
                 }
             }
-            
+
             return highScores;
         }
 
@@ -84,19 +108,22 @@ namespace TiltingMaze.Persistence
         {
             var currentScores = await LoadHighScoreAsync();
 
-            if(!currentScores.ContainsKey(levelIndex) ||
+            if (!currentScores.ContainsKey(levelIndex) ||
                 currentScores[levelIndex] > steps)
             {
                 currentScores[levelIndex] = steps;
             }
 
-            //felulirni az egesz fajlt uj ertekekkel
-            using (StreamWriter writer = new StreamWriter(_highScoreFilePath, false)) //false = overwrite
+            using FileStream stream = new FileStream(_highScoreFilePath, FileMode.Create, FileAccess.Write, FileShare.None);
+            await SaveHighScoreAsync(stream, currentScores);
+        }
+
+        public async Task SaveHighScoreAsync(Stream stream, Dictionary<int, int> scores)
+        {
+            using var writer = new StreamWriter(stream, Encoding.UTF8, leaveOpen: true);
+            foreach (var kvp in scores)
             {
-                foreach (var kvp in currentScores)
-                {
-                    await writer.WriteLineAsync($"{kvp.Key} {kvp.Value}");
-                }
+                await writer.WriteLineAsync($"{kvp.Key} {kvp.Value}");
             }
         }
     }
