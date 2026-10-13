@@ -54,11 +54,13 @@ namespace TiltingMaze.Test
             await _model.NewGameAsync(1); // Level 1 
             bool isWon = false;
             bool gameOverFired = false;
+            bool isNewRecord = false;
 
-            _model.GameOver += (sender, won) =>
+            _model.GameOver += (sender, args) =>
             {
                 gameOverFired = true;
-                isWon = won;
+                isWon = args.isWon;
+                isNewRecord = args.isNewRecord;
             };
 
             _model.Tilt(Direction.Right);
@@ -75,11 +77,13 @@ namespace TiltingMaze.Test
             await _model.NewGameAsync(2); // Level2
             bool isWon = true;
             bool gameOverFired = false;
+            bool isNewRecord = false;
 
-            _model.GameOver += (sender, won) =>
+            _model.GameOver += (sender, args) =>
             {
                 gameOverFired = true;
-                isWon = won;
+                isWon = args.isWon;
+                isNewRecord = args.isNewRecord;
             };
 
             _model.Tilt(Direction.Right);

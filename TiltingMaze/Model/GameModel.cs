@@ -281,9 +281,9 @@ namespace TiltingMaze.Model
             }
 
             //vissza a regi
-            _balls = prevState.BallState;
+            _balls = prevState.GetBallState();
 
-            _gameTime = prevState.GameTime;
+            _gameTime = prevState.GetGameTime();
             TimeAdvanced?.Invoke(this, _gameTime);
 
             _tiltCount++;
